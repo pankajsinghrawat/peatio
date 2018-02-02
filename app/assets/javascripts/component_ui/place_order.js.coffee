@@ -6,6 +6,9 @@
     dangerSel: '.status-danger'
     priceAlertSel: '.hint-price-disadvantage'
     positionsLabelSel: '.hint-positions'
+    marketOrderSel: 'a.market-order'
+    limitOrderSel: 'a.limit-order'
+    priceSelector: '.price'
 
     priceSel: 'input[id$=price]'
     volumeSel: 'input[id$=volume]'
@@ -13,6 +16,16 @@
 
     currentBalanceSel: 'span.current-balance'
     submitButton: ':submit'
+
+  @marketOrderClick=->
+    @select('marketOrderSel').addClass('active');
+    @select('limitOrderSel').removeClass('active');
+    @select('priceSelector').hide()
+
+  @limitOrderClick=->
+    @select('marketOrderSel').removeClass('active');
+    @select('limitOrderSel').addClass('active');
+    @select('priceSelector').show()
 
   @panelType = ->
     switch @$node.attr('id')
@@ -122,8 +135,13 @@
     @resetForm(e)
     @trigger 'place_order::focus::price'
 
+  @refresh =(event, ticker) ->
+    @select('priceSel').val(ticker.buy)
+
   @after 'initialize', ->
     type = @panelType()
+    @on document, 'market::ticker', @refresh
+    
 
     if type == 'ask'
       @usedInput = 'volume'
@@ -147,3 +165,6 @@
     @on @select('formSel'), 'ajax:error', @handleError
 
     @on @select('currentBalanceSel'), 'click', @allIn
+
+    @on @select('marketOrderSel'), 'click', @marketOrderClick
+    @on @select('limitOrderSel'), 'click', @limitOrderClick
