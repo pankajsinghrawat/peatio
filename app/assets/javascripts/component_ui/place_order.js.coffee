@@ -6,13 +6,34 @@
     dangerSel: '.status-danger'
     priceAlertSel: '.hint-price-disadvantage'
     positionsLabelSel: '.hint-positions'
+    marketOrderSel: 'a.market-order'
+    limitOrderSel: 'a.limit-order'
+    priceSelector: '.price'
 
     priceSel: 'input[id$=price]'
     volumeSel: 'input[id$=volume]'
     totalSel: 'input[id$=total]'
+    orderType: 'input[id$=ord_type]'
 
     currentBalanceSel: 'span.current-balance'
     submitButton: ':submit'
+
+
+  @marketOrderClick=->
+    @select('marketOrderSel').addClass('active');
+    @select('limitOrderSel').removeClass('active');
+    @select('priceSelector').hide();
+    @select('priceSel').val(null);
+    @select('orderType').val('market');
+    #@select('totalSel').remove();   
+    #@select('priceSel').remove();   
+
+  @limitOrderClick=->
+    @select('marketOrderSel').removeClass('active');
+    @select('limitOrderSel').addClass('active');
+    @select('priceSelector').show();
+    @select('priceSel').val(@getLastPrice());
+    @select('orderType').val('limit');
 
   @panelType = ->
     switch @$node.attr('id')
@@ -122,8 +143,13 @@
     @resetForm(e)
     @trigger 'place_order::focus::price'
 
+  @refresh =(event, ticker) ->
+    @select('priceSel').val(@getLastPrice());
+
   @after 'initialize', ->
     type = @panelType()
+    @on document, 'market::ticker', @refresh
+    
 
     if type == 'ask'
       @usedInput = 'volume'
@@ -147,3 +173,6 @@
     @on @select('formSel'), 'ajax:error', @handleError
 
     @on @select('currentBalanceSel'), 'click', @allIn
+
+    @on @select('marketOrderSel'), 'click', @marketOrderClick
+    @on @select('limitOrderSel'), 'click', @limitOrderClick

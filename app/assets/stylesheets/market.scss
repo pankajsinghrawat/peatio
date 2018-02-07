@@ -466,6 +466,17 @@ header {
 #ask_entry, #bid_entry { width: $entry-width; height: $entry-height; }
 .entry-right { bottom: $gutter; right: $gutter + $entry-width + $gutter; }
 .entry-left { bottom: $gutter; right: $gutter; }
+.market-order{ position: inherit}
+.limit-order{ position: inherit}
+
+
+#bid_entry_wrapper {
+  .dropdown-wrapper {
+    position: absolute;
+    height: 0;
+    bottom: $entry-height; right: $order-book-width + $gutter;
+  }
+}
 
 #ticker {
   width: $ticker-width; height: $ticker-height;
@@ -630,6 +641,8 @@ header {
     bottom: $gutter-2x + $entry-height; right: $order-book-width + $gutter;
   }
 }
+
+
 
 #my_orders {
   width: $my-orders-width; height: $my-orders-height;
