@@ -1,19 +1,7 @@
-# <div id="bid_entry_wrapper" class="has-left-dropdown">
-#   <div class="dropdown-wrapper">
-#     <ul class="dropdown-menu">
-#       <li>
-#       <a class="market-order active" href="#"><%= t('.market_order_html') %></a>
-#     </li>
-#       <li>
-#       <a class="limit-order" href="#"><%= t('.limit_order_html') %></a>
-#       </li>
-#     </ul>
-#   </div>
-
 <div id="bid_entry" class="panel panel-default entry-right">
   <div class="panel-body">
-  <a class="market-order active" href="#"><%= t('.market_order_html') %></a>
-  <a class="limit-order" href="#"><%= t('.limit_order_html') %></a>
+  <a class="market-order active" href="#"><%= t('.market_order') %></a>
+  <a class="limit-order" href="#"><%= t('.limit_order') %></a>
     <%= form_for [market, order], remote: true do |f| %>
       <%= f.hidden_field :ord_type %>
       <div class="input-group price">
@@ -42,4 +30,3 @@
   </div>
   <%= render partial: 'mask' %>
 </div>
-# </div>

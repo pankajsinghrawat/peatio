@@ -771,8 +771,8 @@ en:
         last_price: Last Price
         amount: Amount
         total: Total
-        market_order_html: Market Order
-        limit_order_html: Limit Order
+        market_order: Market Order
+        limit_order: Limit Order
       ask_entry:
         action: "Sell %{currency}"
         price: Price

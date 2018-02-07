@@ -13,19 +13,27 @@
     priceSel: 'input[id$=price]'
     volumeSel: 'input[id$=volume]'
     totalSel: 'input[id$=total]'
+    orderType: 'input[id$=ord_type]'
 
     currentBalanceSel: 'span.current-balance'
     submitButton: ':submit'
 
+
   @marketOrderClick=->
     @select('marketOrderSel').addClass('active');
     @select('limitOrderSel').removeClass('active');
-    @select('priceSelector').hide()
+    @select('priceSelector').hide();
+    @select('priceSel').val(null);
+    @select('orderType').val('market');
+    #@select('totalSel').remove();   
+    #@select('priceSel').remove();   
 
   @limitOrderClick=->
     @select('marketOrderSel').removeClass('active');
     @select('limitOrderSel').addClass('active');
-    @select('priceSelector').show()
+    @select('priceSelector').show();
+    @select('priceSel').val(@getLastPrice());
+    @select('orderType').val('limit');
 
   @panelType = ->
     switch @$node.attr('id')
@@ -136,7 +144,7 @@
     @trigger 'place_order::focus::price'
 
   @refresh =(event, ticker) ->
-    @select('priceSel').val(ticker.buy)
+    @select('priceSel').val(@getLastPrice());
 
   @after 'initialize', ->
     type = @panelType()
