@@ -67,8 +67,8 @@ class ApplicationController < ActionController::Base
 
     gon.pusher = {
       key:       ENV.fetch('PUSHER_KEY', nil),
-      cluster:   ENV.fetch('PUSHER_CLUSTER', 'eu'),
-      wsHost:    ENV.fetch('PUSHER_HOST', 'ws.pusherapp.com'),
+      cluster:   ENV.fetch('PUSHER_CLUSTER', 'mt1'),
+      wsHost:    ENV.fetch('PUSHER_HOST', 'ws-mt1.pusher.com'),
       wsPort:    ENV.fetch('PUSHER_WS_PORT', 80).to_i,
       wssPort:   ENV.fetch('PUSHER_WSS_PORT', 443).to_i,
       encrypted: ENV.fetch('PUSHER_ENCRYPTED', true)
