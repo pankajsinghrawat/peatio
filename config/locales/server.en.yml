@@ -1248,7 +1248,7 @@ en:
   slogan:
     heading: Peatio Open-Source Exchange
     subheading: Cloud deployment made simple and secure
-    text1: Peatio - Cryptocurrency exchange for managing digital currency.
+    text1: Cryptocurrency exchange for managing digital currency.
     text2: We provide Peatio installation and configuration services.
   trade:
     markets: Markets
@@ -1394,9 +1394,9 @@ en:
     application:
       close: Close
     meta:
-      page_title: Peatio - The Opensource Cryptocurrency Exchange
-      page_description: Peatio - The Opensource Cryptocurrency Exchange
-      page_keywords: Peatio,Opensource,Exchange,Cryptocurrency
+      page_title: Cryptocurrency Exchange
+      page_description: Cryptocurrency Exchange
+      page_keywords: Opensource,Exchange,Cryptocurrency
   members:
     edit:
       name: Please fill out the application.

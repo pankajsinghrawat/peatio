@@ -9,6 +9,7 @@
     marketOrderSel: 'a.market-order'
     limitOrderSel: 'a.limit-order'
     priceSelector: '.price'
+    placeHolder: '.placeholder'
 
     priceSel: 'input[id$=price]'
     volumeSel: 'input[id$=volume]'
@@ -20,20 +21,23 @@
 
 
   @marketOrderClick=->
-    @select('marketOrderSel').addClass('active');
-    @select('limitOrderSel').removeClass('active');
+    @select('marketOrderSel').addClass('highight-border');
+    @select('limitOrderSel').removeClass('highight-border');
     @select('priceSelector').hide();
     @select('priceSel').val(null);
     @select('orderType').val('market');
+    @select('placeHolder').show();
+    
     #@select('totalSel').remove();   
     #@select('priceSel').remove();   
 
   @limitOrderClick=->
-    @select('marketOrderSel').removeClass('active');
-    @select('limitOrderSel').addClass('active');
+    @select('marketOrderSel').removeClass('highight-border');
+    @select('limitOrderSel').addClass('highight-border');
     @select('priceSelector').show();
-    @select('priceSel').val(@getLastPrice());
+    @trigger 'place_order::input::price', {price: @getLastPrice()}
     @select('orderType').val('limit');
+    @select('placeHolder').hide();
 
   @panelType = ->
     switch @$node.attr('id')
@@ -49,6 +53,7 @@
     @trigger 'place_order::reset::price'
     @trigger 'place_order::reset::volume'
     @trigger 'place_order::reset::total'
+    @trigger 'place_order::input::price', {price: @getLastPrice()}
     @priceAlertHide()
 
   @disableSubmit = ->
@@ -82,6 +87,7 @@
     @resetForm(event)
     window.sfx_success()
     @enableSubmit()
+    # location.reload()
 
   @handleError = (event, data) ->
     @cleanMsg()
@@ -91,6 +97,7 @@
       .addClass(ef_class).wait(500).removeClass(ef_class)
     window.sfx_warning()
     @enableSubmit()
+    # location.reload()
 
   @getBalance = ->
     BigNumber( @select('currentBalanceSel').data('balance') )
@@ -144,7 +151,8 @@
     @trigger 'place_order::focus::price'
 
   @refresh =(event, ticker) ->
-    @select('priceSel').val(@getLastPrice());
+     @trigger 'place_order::input::price', {price: @getLastPrice()}
+     @select('limitOrderSel').addClass('highight-border')
 
   @after 'initialize', ->
     type = @panelType()

@@ -469,7 +469,7 @@ header {
 .market-order{ position: inherit}
 .limit-order{ position: inherit}
 
-
+a:hover, a:focus { text-decoration: none; }
 #bid_entry_wrapper {
   .dropdown-wrapper {
     position: absolute;
@@ -707,7 +707,9 @@ header {
 
 #ask_entry, #bid_entry {
   z-index: 999;
-
+  .market-order{ line-height: 22px;}
+  .limit-order{ line-height: 22px; }
+  .highight-border{ border-bottom: 1px solid #fff;}
   .panel-body { padding-top: 10px; }
 
   .btn:focus, .btn:active:focus, .btn.active:focus {
@@ -769,8 +771,8 @@ header {
   }
 
   .row-tips {
-    margin-top: 18px;
-    margin-bottom: 13px;
+    margin-top: 5px;
+    margin-bottom: 3px;
 
     .current-balance { font-family: $font-family-monospace; }
     .unit { padding-left: 3px; }

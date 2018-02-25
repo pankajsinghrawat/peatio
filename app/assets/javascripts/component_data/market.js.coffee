@@ -3,7 +3,7 @@
   @load = (event, data) ->
     @trigger 'market::candlestick::request'
     @reqK gon.market.id, data['x']
-
+    
   @reqK = (market, minutes, limit = 768) ->
     tid = if gon.trades.length > 0 then gon.trades[0].tid else 0
     tid = @last_tid+1 if @last_tid
@@ -120,11 +120,12 @@
 
   @hardRefresh = (threshold) ->
     ts = Math.round( new Date().valueOf()/1000 )
-
+    # location.reload()
     # if there's no trade received in `threshold` seconds, request server side data
     if ts > @updated_at + threshold
       @refreshUpdatedAt()
       @reqK gon.market.id, @minutes
+    # @reqK gon.market.id, @minutes
 
   @startDeliver = (event, data) ->
     if @interval?
@@ -146,3 +147,4 @@
     @on document, 'market::trades', @cacheTrades
     @on document, 'switch::range_switch', @load
     @on document, 'market::candlestick::created', @startDeliver
+
