@@ -21,10 +21,10 @@ log
 tmp
 
 # Ignore all config files
-/config/application.yml
-/config/currencies.yml
-/config/markets.yml
-/config/banks.yml
+#/config/application.yml
+#/config/currencies.yml
+#/config/markets.yml
+#/config/banks.yml
 
 # Ignore translations.js
 /public/javascripts/translations.js
