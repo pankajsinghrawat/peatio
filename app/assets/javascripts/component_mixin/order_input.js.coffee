@@ -16,10 +16,6 @@
     value = BigNumber(text)
 
     switch
-      when text == '.'
-        @text = text
-        @value = value
-        true
       when text == @text
         false
       when text == ''

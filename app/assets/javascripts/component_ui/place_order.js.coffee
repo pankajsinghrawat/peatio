@@ -144,7 +144,7 @@
     @trigger 'place_order::focus::price'
 
   @refresh =(event, ticker) ->
-    @trigger 'place_order::input::price', {price: @getLastPrice()}
+    @select('priceSel').val(@getLastPrice());
 
   @after 'initialize', ->
     type = @panelType()
