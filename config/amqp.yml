@@ -1,8 +1,8 @@
 connect:
-  host: <%= ENV.fetch('RABBITMQ_HOST', 'localhost') %>
+  host: 18.219.159.84
   port: <%= ENV.fetch('RABBITMQ_PORT', '5672') %>
-  username: <%= ENV.fetch('RABBITMQ_USER', 'guest') %>
-  password: <%= ENV.fetch('RABBITMQ_PASSWORD', 'guest') %>
+  username: <%= ENV.fetch('RABBITMQ_USER', 'test') %>
+  password: <%= ENV.fetch('RABBITMQ_PASSWORD', 'test') %>
 
 exchange:
   trade:
